@@ -1,0 +1,233 @@
+/* Colours, fonts and the spacing scale used everywhere */
+:root {
+  --bg: #FCEEEE;
+  --white: #FFFFFF;
+  --text: #2B2326;
+  --text-2: #5A4B50;
+  --line: #EBD3D3;
+  --accent: #4A6B55;
+  --accent-dark: #34503F;
+  --font-head: "Fraunces", Georgia, serif;
+  --font-body: "Nunito Sans", system-ui, Arial, sans-serif;
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 40px;
+  --s5: 64px;
+}
+
+/* Page base: body, headings, paragraphs and links */
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: 72px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-head); font-weight: 600; line-height: 1.2; }
+
+h1 { font-size: clamp(2.5rem, 7vw, 3.75rem); }
+h2 { margin-bottom: var(--s3); font-size: 2.125rem; }
+h3 { margin-bottom: var(--s1); font-size: 1.3125rem; }
+
+p { margin: 0; max-width: 68ch; }
+
+a { color: var(--accent); }
+a:hover { color: var(--accent-dark); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Navigation bar, built with flexbox, with rounded link shapes */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--s1) var(--s3);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s2);
+  border-radius: 999px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-brand:hover { color: var(--accent); }
+.nav-link:hover { background: var(--white); color: var(--accent-dark); }
+
+/* Page sections: one centred column with big gaps between sections */
+main { padding-bottom: var(--s5); overflow-x: clip; }
+
+main > section { max-width: 960px; margin: 0 auto; padding: var(--s5) var(--s3) 0; }
+
+/* About section: two short paragraphs, then language and interest cards */
+#about p + p { margin-top: var(--s2); }
+#about .cards { margin-top: var(--s4); }
+
+/* Hero: one big rounded white panel with name, sentence and buttons */
+#hero { padding-top: var(--s4); }
+
+.hero-panel {
+  padding: var(--s5) var(--s4);
+  background: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  color: var(--white);
+  border-radius: 28px;
+}
+
+/* Hero layout: text on the left and the photo on the right, side by side with flexbox */
+.hero-panel { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
+.hero-copy { flex: 1 1 auto; }
+.hero-photo { flex: none; width: 220px; height: 220px; border: 4px solid var(--white); border-radius: 50%; object-fit: cover; }
+
+/* Highlights: four real facts in a flexbox row under the hero panel */
+.highlights { display: flex; flex-wrap: wrap; gap: var(--s3); margin: var(--s3) 0 0; padding: 0; list-style: none; color: var(--text-2); }
+.highlights li { flex: 1 1 180px; padding: var(--s3); background: var(--white); border: 1px solid var(--line); border-radius: 20px; }
+.stat { display: block; font-family: var(--font-head); font-size: 2.25rem; font-weight: 600; line-height: 1.2; color: var(--accent-dark); }
+
+.hero-role { margin: var(--s1) 0 var(--s3); font-size: 1.375rem; color: #DCE8DF; }
+.hero-text { margin-bottom: var(--s3); }
+
+/* Buttons: filled sage for the main action, outlined for the others */
+.button-row { display: flex; flex-wrap: wrap; gap: var(--s1); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.button:hover { background: var(--accent); color: var(--white); }
+.button-primary { background: var(--accent); color: var(--white); }
+.button-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: var(--white); }
+
+/* Buttons inside the dark hero panel use white instead of green */
+.hero-panel .button { border-color: var(--white); color: var(--white); }
+.hero-panel .button:hover, .hero-panel .button-primary { background: var(--white); color: var(--accent-dark); }
+.hero-panel .button-primary:hover { background: var(--bg); border-color: var(--bg); }
+
+/* Cards: flat white cards in a grid, each as tall as its own text */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s3); align-items: start; }
+
+.card { padding: var(--s3); background: var(--white); border: 1px solid var(--line); border-radius: 20px; }
+
+.card p + p { margin-top: var(--s1); }
+.meta { color: var(--text-2); }
+
+/* Contact section: text, then the email and LinkedIn buttons */
+#contact p { margin-bottom: var(--s3); }
+
+/* Footer: name on the left and a back-to-top link on the right */
+.footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2); max-width: 960px; margin: 0 auto; padding: var(--s3); border-top: 1px solid var(--line); color: var(--text-2); }
+.footer a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Resume section: the download button above the white paper sheet */
+#paper > p { margin-bottom: var(--s3); }
+
+#resume {
+  max-width: 210mm;
+  padding: var(--s4);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.resume-name { font-family: var(--font-head); font-size: 1.875rem; font-weight: 600; line-height: 1.2; }
+.resume-contact { margin-top: var(--s1); margin-bottom: var(--s2); }
+#resume h3 { margin: var(--s3) 0 var(--s1); padding-bottom: var(--s1); border-bottom: 1px solid var(--line); font-size: 1.125rem; }
+#resume h4 { margin-top: var(--s2); font-family: var(--font-body); font-size: 1rem; font-weight: 600; }
+#resume ul { margin: var(--s1) 0 0; padding-left: 20px; }
+#resume li { margin-bottom: 4px; }
+
+/* Screens narrower than 700px: one column, smaller gaps, 16px from the edge */
+@media (max-width: 699px) {
+  html { scroll-padding-top: 0; }
+  .nav-bar { position: static; }
+  .nav { padding: var(--s1) var(--s2); }
+  main > section { padding: var(--s4) var(--s2) 0; }
+  #hero { padding-top: var(--s3); }
+  .hero-panel { flex-direction: column-reverse; align-items: flex-start; padding: var(--s4) var(--s3); border-radius: 20px; }
+  .hero-photo { width: 160px; height: 160px; }
+  h2 { font-size: 1.75rem; }
+  .cards { grid-template-columns: 1fr; }
+  .button-row .button,
+  #paper .button { width: 100%; }
+  #resume { padding: var(--s3) var(--s2); }
+}
+/* Scroll reveal: headings and cards slide in from the sides as they scroll into view, CSS only */
+@keyframes from-left { from { opacity: 0; transform: translateX(-80px); } to { opacity: 1; transform: none; } }
+@keyframes from-right { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: none; } }
+@supports (animation-timeline: view()) {
+  h2, .card, .highlights li { animation: from-left linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+  .card:nth-child(even), .highlights li:nth-child(even) { animation-name: from-right; }
+}
+
+/* Turn off the button colour fade for people who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+  h2, .card, .highlights li { animation: none; }
+}
+
+/* Print: show only the resume, black on white, on one A4 page */
+@page { size: A4; margin: 15mm; }
+
+@media print {
+  .nav-bar, .footer, #hero, #about, #experience, #skills, #analysis, #education, #contact,
+  #paper > h2, #paper > p { display: none; }
+  body { background: #fff; color: #000; }
+  main { padding: 0; }
+  #paper { max-width: none; padding: 0; }
+  #resume { max-width: none; margin: 0; padding: 0; border: 0; font-size: 10.5pt; line-height: 1.4; }
+  #resume, #resume * { color: #000; }
+  #resume a { text-decoration: none; }
+  #resume h3 { border-bottom: 1px solid #000; }
+}
