@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Samiksha Ramesh | Marketing internship</title>
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -230,5 +231,22 @@
     <a href="#hero">Back to top</a>
   </footer>
 
+  <script>
+    /* Adds the class "in-view" to headings and cards when they scroll into view. The CSS slides them in. */
+    var items = document.querySelectorAll("h2, .card, .highlights li");
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(function (item) { observer.observe(item); });
+    } else {
+      items.forEach(function (item) { item.classList.add("in-view"); });
+    }
+  </script>
 </body>
 </html>

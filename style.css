@@ -203,18 +203,15 @@ main > section { max-width: 960px; margin: 0 auto; padding: var(--s5) var(--s3) 
   #paper .button { width: 100%; }
   #resume { padding: var(--s3) var(--s2); }
 }
-/* Scroll reveal: headings and cards slide in from the sides as they scroll into view, CSS only */
-@keyframes from-left { from { opacity: 0; transform: translateX(-80px); } to { opacity: 1; transform: none; } }
-@keyframes from-right { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: none; } }
-@supports (animation-timeline: view()) {
-  h2, .card, .highlights li { animation: from-left linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
-  .card:nth-child(even), .highlights li:nth-child(even) { animation-name: from-right; }
-}
+/* Scroll reveal: headings and cards slide in from the sides when the small script marks them in-view */
+html.js :is(h2, .card, .highlights li) { opacity: 0; transform: translateX(-80px); transition: opacity 0.7s, transform 0.7s; }
+html.js :is(.card, .highlights li):nth-child(even) { transform: translateX(80px); }
+html.js .in-view { opacity: 1 !important; transform: none !important; }
 
 /* Turn off the button colour fade for people who ask for less motion */
 @media (prefers-reduced-motion: reduce) {
   .button { transition: none; }
-  h2, .card, .highlights li { animation: none; }
+  html.js :is(h2, .card, .highlights li) { opacity: 1; transform: none; transition: none; }
 }
 
 /* Print: show only the resume, black on white, on one A4 page */
